@@ -1,14 +1,16 @@
 import PostItem from '@/components/PostItem';
-import SearchBox from '@/components/SearchBox';
 import { fetchPosts } from '@/services/post-service';
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { GetServerSidePropsContext } from 'next';
+import { Inter } from 'next/font/google';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
+import SearchBox from '@/components/SearchBox';
 
-const POSTS_KEY = 'POSTS_INDEX';
+const POSTS_KEY = 'postsx';
 
-export default function HomePage() {
+export default function PostPage() {
 
   const { i18n } = useTranslation('common');
 
