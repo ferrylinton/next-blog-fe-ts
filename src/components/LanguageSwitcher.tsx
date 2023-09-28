@@ -15,16 +15,16 @@ export default function LanguageSwitcher() {
     }
 
     return (
-        <div className="relative flex items-center text-base">
-            <div className='w-[68px] h-[34px] absolute bg-slate-400 text-slate-100 rounded-full flex items-center justify-center text-center'>
-                <div className='w-[30px] '>ID</div>
-                <div className='w-[30px] '>EN</div>
+        <div className="w-[74px] h-[36px] relative flex items-center justify-center text-sm border border-gray-400 ">
+            <div className='w-full absolute text-gray-500 flex items-center justify-center text-center'>
+                <div className='w-[30px]'>ID</div>
+                <div className='w-[30px]'>EN</div>
             </div>
             <Switch.Root
                 checked={i18n.language === 'en'} onCheckedChange={handleOnCheckedChange}
-                className="language-switcher w-[68px] h-[34px] bg-transparent rounded-full relative outline-none cursor-default"
+                className="language-switcher w-full bg-transparent relative outline-none cursor-default"
                 id="language-switcher" >
-                <Switch.Thumb className="flex items-center justify-center w-[30px] h-[30px] bg-white rounded-full transition-transform duration-100 translate-x-[2px] will-change-transform data-[state=checked]:translate-x-[36px]">
+                <Switch.Thumb className="flex items-center justify-center w-1/2 h-[34px] rounded-sm bg-gray-500 text-white border border-white transition-transform duration-100 will-change-transform data-[state=checked]:translate-x-[100%]">
                     {i18n.language === 'id' ? 'ID' : 'EN'}
                 </Switch.Thumb>
             </Switch.Root>
