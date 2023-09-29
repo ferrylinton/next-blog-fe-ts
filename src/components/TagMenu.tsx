@@ -36,7 +36,7 @@ const TagMenu = () => {
                     <span className='uppercase'>{selected == '/tag/all' ? t('allTag') : selected.replace('/tag/', '')}</span>
                     <AngelDownIcon className='w-[10px] h-[10px] cursor-pointer' />
                 </button>
-                <div className={`absolute top-[calc(100%+2px)] z-[52] right-0 w-48 bg-white ${open ? '' : 'hidden'}`}>
+                <div className={`absolute top-[calc(100%+2px)] z-[52] right-0 w-48 bg-white ${open ? 'animate-slideDownAndFade' : 'hidden'}`}>
                     <div className='flex flex-col items-center justify-center p-2 border border-gray-300 shadow-[0px_5px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_5px_20px_-15px_rgba(22,_23,_24,_0.2)]'>
                         <Link key='allTag'
                             className='w-full py-1 px-4 rounded uppercase border border-white hover:bg-gray-200 hover:text-gray-700 hover:border-gray-300'

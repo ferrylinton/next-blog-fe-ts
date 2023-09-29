@@ -1,22 +1,17 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import Navbar from './Navbar';
-import { fetchTags, TAGS_KEY } from '@/services/tag-service';
-import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
-import Banner from './Banner';
-import { useAppContext } from '@/providers/app-context';
-import clsx from 'clsx';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] })
 
 
 export default function Layout({ children }: PropsWithChildren) {
 
-    const { data } = useQuery(TAGS_KEY, fetchTags);
-
     return (
-        <>
+        <div className={`${inter.className}`}>
             <Navbar />
-            <Banner />
-            <div className="w-full mt-[70px] flex flex-col min-w-[350px]">
-                <div className='w-full grow'>
+            <div className="w-full min-h-screen pt-[110px] sm:pt-[70px] flex flex-col min-w-[350px]">
+                <div className='w-full grow flex justify-center items-start'>
                     {children}
                 </div>
                 <footer className="w-full flex-none">
@@ -25,6 +20,6 @@ export default function Layout({ children }: PropsWithChildren) {
                     </div>
                 </footer>
             </div>
-        </>
+        </div>
     )
 }

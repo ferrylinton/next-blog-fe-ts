@@ -3,5 +3,7 @@
     "tag": "Tag",
     "author": "Penulis",
     "allTag": "Semua Tag",
-    "keyword": "kata kunci"
+    "keyword": "kata kunci",
+    "total": "Total",
+    "pageOf" : "Halaman {{page, number}} dari {{totalPage, number}}"
 }

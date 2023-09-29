@@ -3,5 +3,7 @@
     "tag": "Tag",
     "author": "Author",
     "allTag": "All Tag",
-    "keyword": "keyword"
+    "keyword": "keyword",
+    "total": "Total",
+    "pageOf" : "Page {{page, number}} of {{totalPage, number}}"
 }

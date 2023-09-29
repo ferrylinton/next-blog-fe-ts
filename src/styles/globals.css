@@ -10,31 +10,12 @@
 @layer components {
 
   body{
-    @apply bg-gray-50 text-gray-700
+    @apply bg-white text-gray-700
   }
 
   svg {
     @apply w-[12px] h-[12px] fill-current
   }
 
-  .dropdown-content{
-    @apply z-[52] w-[calc(100%-20px)] 
-  }
-
-  .dropdown-content{
-    @apply sm:z-auto sm:w-[200px] sm:absolute 
-  }
-
-  .dropdown-content.open {
-    @apply overflow-hidden animate-slideDownAndFade
-  }
-
-  .dropdown-content.close {
-    @apply opacity-0 overflow-hidden h-0
-  }
-
-  .dropdown-content.close {
-    @apply sm:opacity-100 sm:h-auto
-  }
 
 }
