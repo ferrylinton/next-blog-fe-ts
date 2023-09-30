@@ -14,7 +14,7 @@ export type Post = {
         id: string,
         en: string
     },
-    content?: {
+    content: {
         id: string,
         en: string
     }

@@ -22,20 +22,22 @@ export default function PostByTag() {
     const tag = typeof router.query?.tag === "string" ? router.query.tag : '';
 
     return (
-        <main className='w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col'>
-            {tag && <div className='flex flex-col my-5 lowercase px-2 md:px-0 '>
-                <div className='w-full flex justify-between gap-2 border-b border-gray-300'>
-                    <div className='text-lg'>
-                        <span className='capitalize font-bold'>{t('tag')} :</span> {tag}
+        <div className='w-full h-full grow flex justify-center items-start'>
+            <div className='w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col'>
+                {tag && <div className='flex flex-col my-5 lowercase px-2 md:px-0 '>
+                    <div className='w-full flex justify-between gap-2 border-b border-gray-300'>
+                        <div className='text-base'>
+                            <span className='capitalize font-bold'>{t('tag')} : </span> {tag}
+                        </div>
                     </div>
+                </div>}
+                <div className="flex flex-col flex-wrap gap-2 px-2 md:px-0">
+                    {
+                        pageable && pageable.data.map((post, index) => <PostItem key={index} post={post} />)
+                    }
                 </div>
-            </div>}
-            <div className="flex flex-col flex-wrap gap-2 px-2 md:px-0">
-                {
-                    pageable && pageable.data.map((post, index) => <PostItem key={index} post={post} />)
-                }
             </div>
-        </main>
+        </div>
     )
 }
 

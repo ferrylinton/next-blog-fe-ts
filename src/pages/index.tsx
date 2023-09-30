@@ -1,6 +1,5 @@
 import Banner from '@/components/Banner';
 import PostItem from '@/components/PostItem';
-import SearchBox from '@/components/SearchBox';
 import { fetchPosts } from '@/services/post-service';
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { GetServerSidePropsContext } from 'next';
@@ -20,14 +19,16 @@ export default function HomePage() {
   const { data: pageable } = useQuery([POSTS_KEY], () => fetchPosts());
 
   return (
-    <main className={`w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col`}>
-      <Banner />
-      <div className="flex flex-col flex-wrap gap-2 px-2 md:px-0">
-        {
-          pageable && pageable.data.map((post, index) => <PostItem key={index} post={post} />)
-        }
+    <div className='w-full h-full grow flex justify-center items-start'>
+      <div className={`w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col`}>
+        <Banner />
+        <div className="flex flex-col flex-wrap gap-2 px-2 md:px-0">
+          {
+            pageable && pageable.data.map((post, index) => <PostItem key={index} post={post} />)
+          }
+        </div>
       </div>
-    </main>
+    </div>
   )
 }
 

@@ -5,5 +5,6 @@ export type Pageable<T> = {
         page?: number,
         pageSize?: number
     },
-    keyword?: string
+    keyword?: string,
+    tag?:string
 }

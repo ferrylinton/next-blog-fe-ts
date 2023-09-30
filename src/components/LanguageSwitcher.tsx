@@ -11,7 +11,7 @@ export default function LanguageSwitcher() {
 
     const handleOnCheckedChange = (checked: boolean) => {
         const { pathname, asPath, query } = router;
-        router.push({ pathname, query }, asPath, { locale: checked ? 'en' : 'id' });
+        router.push({ pathname, query }, asPath, { locale: checked ? 'en' : 'id' }) ;
     }
 
     return (

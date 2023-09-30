@@ -2,10 +2,11 @@ import SearchIcon from '@/icons/SearchIcon';
 import { useTranslation } from 'next-i18next';
 import { Righteous } from 'next/font/google';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { ChangeEvent, useState } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
 import TagMenu from './TagMenu';
-import { useRouter } from 'next/router'
-import { ChangeEvent, useState } from 'react';
+import CloseIcon from '@/icons/CloseIcon';
 
 
 const logoFont = Righteous({
@@ -16,12 +17,25 @@ const logoFont = Righteous({
 export default function Navbar() {
 
     const router = useRouter();
-    
+
     const [keyword, setKeyword] = useState<string>(typeof router.query?.keyword === "string" ? router.query.keyword : '');
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        setKeyword(event.target.value);
-      }
+        setKeyword(event.target.value.replace(/\s/g, ''));
+    }
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        if (keyword.length > 2) {
+            event.currentTarget.submit();
+        }
+    }
+
+    const handleReset = () => {
+        setKeyword('');
+        router.push('/post', undefined, { locale: i18n.language });
+    }
 
     const { i18n } = useTranslation('common');
 
@@ -41,6 +55,7 @@ export default function Navbar() {
                     </div>
                     <form
                         action='/post'
+                        onSubmit={handleSubmit}
                         noValidate
                         autoComplete='off'
                         className={`bg-white w-full sm:p-0 sm:w-[200px] md:w-[300px]`}>
@@ -50,9 +65,14 @@ export default function Navbar() {
                                 onChange={handleChange}
                                 placeholder={t('keyword')}
                                 value={keyword}
+                                maxLength={20}
                                 className="w-full h-[36px] px-3 border border-gray-400 pr-10 text-sm focus:outline-none focus:ring-2 ring-blue-200" />
-                            <button type="submit" className="absolute top-0 right-0 h-full px-4 text-gray-600 hover:text-gray-600">
-                                <SearchIcon className='w-[24px] h-[24px]' />
+                            {keyword && keyword.length > 2 && <button type="button" onClick={() => handleReset()}
+                                className="absolute top-0 right-[35px] h-full w-[30px] text-red-500 hover:text-red-700">
+                                <CloseIcon className='w-[16px] h-[16px] mx-auto border border-red-500 hover:border-red-700 rounded-full' />
+                            </button>}
+                            <button type="submit" className="absolute top-0 right-0 h-full w-[35px] text-gray-500 hover:text-gray-700">
+                                <SearchIcon className='w-[24px] h-[24px] mx-auto' />
                             </button>
                         </div>
                     </form>

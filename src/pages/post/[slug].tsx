@@ -1,13 +1,11 @@
-import PostItem from '@/components/PostItem';
-import { fetchPostBySlug, fetchPosts } from '@/services/post-service';
-import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
+import { markdownToHtml } from '@/libs/markdown';
+import { fetchPostBySlug } from '@/services/post-service';
+import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 import { GetServerSidePropsContext } from 'next';
-import { Inter } from 'next/font/google';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Image from 'next/image';
-import { useTranslation } from 'react-i18next';
-import SearchBox from '@/components/SearchBox';
 import { useRouter } from "next/router";
+import { useTranslation } from 'react-i18next';
+import { useState, useEffect } from 'react'
 
 const POST_BY_SLUG_KEY: string = 'PostBySlug'
 
@@ -21,25 +19,22 @@ export default function PostBySlug({ slug }: Props) {
 
     const { i18n } = useTranslation('common');
 
-    const slug2 = typeof router.query?.slug === "string" ? router.query.slug : "";
-    console.log(slug2)
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
 
 
     const { data: post } = useQuery([POST_BY_SLUG_KEY, slug], () => fetchPostBySlug(slug));
 
     return (
-        <>
-            <SearchBox />
-            <main className={`flex min-h-screen flex-col items-center justify-between`}>
-
-                <div className="mx-auto w-full md:max-w-2xl lg:max-w-4xl xl:max-w-5xl flex justify-start items-start flex-wrap gap-2 px-3">
-                    {
-                        slug
-                    }
-
-                </div>
-            </main>
-        </>
+        <div className='w-full h-full grow flex justify-center items-start'>
+            <div className='w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col'>
+                {isClient && post && <div className="w-full prose prose-neutral max-w-none"
+                    dangerouslySetInnerHTML={{ __html: post?.content[i18n.language as keyof typeof post.content] }} />}
+            </div>
+        </div>
     )
 }
 
