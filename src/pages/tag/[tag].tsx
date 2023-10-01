@@ -1,10 +1,12 @@
 import PostItem from '@/components/PostItem';
+import TagIcon from '@/icons/TagIcon';
+import TagsIcon from '@/icons/TagsIcon';
 import { fetchPosts } from '@/services/post-service';
 import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from "next/router";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 
 const POSTS_BY_TAG: string = 'PostsByTag'
@@ -24,13 +26,16 @@ export default function PostByTag() {
     return (
         <div className='w-full h-full grow flex justify-center items-start'>
             <div className='w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col'>
-                {tag && <div className='flex flex-col my-5 lowercase px-2 md:px-0 '>
-                    <div className='w-full flex justify-between gap-2 border-b border-gray-300'>
-                        <div className='text-base'>
-                            <span className='capitalize font-bold'>{t('tag')} : </span> {tag}
+                {
+                    tag && <div className='flex justify-between my-5 px-2 md:px-0'>
+                        <div className='flex justify-center items-center gap-2 py-2 px-4 bg-gray-600 text-sm text-white'>
+                            <TagIcon className='w-[15px] h-[15px]' />
+                            <span className='font-bold uppercase'>{t('tag')}</span>
+                            <span className='font-bold uppercase'>: </span>
+                            <span>{tag}</span>
                         </div>
                     </div>
-                </div>}
+                }
                 <div className="flex flex-col flex-wrap gap-2 px-2 md:px-0">
                     {
                         pageable && pageable.data.map((post, index) => <PostItem key={index} post={post} />)

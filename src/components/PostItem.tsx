@@ -1,10 +1,10 @@
-import { Post } from '@/types/post-type'
-import { format } from 'date-fns'
-import Link from 'next/link'
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import CalendarIcon from '@/icons/CalendarIcon';
 import TagIcon from '@/icons/TagIcon';
+import { Post } from '@/types/post-type';
+import { getPostDate } from '@/utils/date-util';
+import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type Props = {
     post: Post
@@ -24,13 +24,7 @@ export default function PostItem({ post }: Props) {
         router.push(`/tag/${tag}`, undefined, { locale: i18n.language });
     }
 
-    const getDate = ({ createdAt, updatedAt }: Post) => {
-        if (updatedAt && updatedAt > createdAt) {
-            return format(new Date(updatedAt), 'MM/dd/yyyy');
-        } else {
-            return format(new Date(createdAt), 'MM/dd/yyyy');
-        }
-    }
+    
 
     return (
         <article className="w-full mb-4 bg-white flex flex-col justify-start p-2 border border-gray-200 transition-colors  hover:bg-gradient-to-b from-gray-50 via-gray-100 to-gray-50">
@@ -46,7 +40,7 @@ export default function PostItem({ post }: Props) {
                     <div className='flex gap-3 text-sm uppercase mt-2'>
                         <div className="flex justify-center items-center gap-1 leading-none py-1 border-b border-gray-400 ">
                             <CalendarIcon className='w-[15px] h-[15px]' />
-                            <span>{getDate(post)}</span>
+                            <span>{getPostDate(post)}</span>
                         </div>
                         <div className='flex gap-3'>
                             {

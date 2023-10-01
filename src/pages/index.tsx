@@ -5,7 +5,7 @@ import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 
 const POSTS_KEY = 'POSTS_INDEX';

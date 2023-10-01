@@ -7,18 +7,6 @@
   padding-right: 17px !important;
 }
 
-.prose :where(pre):not(:where([class~="not-prose"] *)) {
-  background-color: #2b384a;
-  font-size: 0.875em;
-  line-height: 1.5;
-  margin-top: 1.7142857em;
-  margin-bottom: 1.7142857em;
-  border-radius: 0.375rem;
-  padding-top: 0.8571429em;
-  padding-right: 1.1428571em;
-  padding-bottom: 0.8571429em;
-  padding-left: 1.1428571em;
-}
 
 @layer components {
 
@@ -30,5 +18,24 @@
     @apply w-[12px] h-[12px] fill-current
   }
 
+  .markdown{
+    @apply prose max-w-none text-gray-700 prose-headings:text-gray-600 prose-a:no-underline hover:prose-a:text-blue-800
+  }
+
+  .markdown{
+    @apply prose-h1:text-2xl prose-h2:text-xl prose-h2:mt-2 prose-h2:mb-1 prose-h3:text-lg
+  }
+
+  .markdown{
+    @apply prose-p:my-1
+  }
+
+  .markdown{
+    @apply prose-img:my-1 prose-img:rounded-lg prose-img:border-2 prose-img:border-slate-200
+  }
+
+  .markdown{
+    @apply prose-pre:my-1 prose-pre:p-1 prose-pre:rounded-none
+  }
 
 }
