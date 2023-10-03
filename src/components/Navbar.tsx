@@ -26,10 +26,7 @@ export default function Navbar() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-        if (keyword.length > 2) {
-            event.currentTarget.submit();
-        }
+        event.currentTarget.submit();
     }
 
     const handleReset = () => {
@@ -67,7 +64,7 @@ export default function Navbar() {
                                 value={keyword}
                                 maxLength={20}
                                 className="w-full h-[36px] px-3 border border-gray-400 pr-10 text-sm focus:outline-none focus:ring-2 ring-blue-200" />
-                            {keyword && keyword.length > 2 && <button type="button" onClick={() => handleReset()}
+                            {keyword && keyword.length > 0 && <button type="button" onClick={() => handleReset()}
                                 className="absolute top-0 right-[35px] h-full w-[30px] text-red-500 hover:text-red-700">
                                 <CloseIcon className='w-[16px] h-[16px] mx-auto border border-red-500 hover:border-red-700 rounded-full' />
                             </button>}

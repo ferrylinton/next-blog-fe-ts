@@ -1,74 +1,61 @@
-import PostItem from '@/components/PostItem';
-import SearchIcon from '@/icons/SearchIcon';
+import PostList from '@/components/PostList';
+import { getPostsServerSideProps } from '@/services/post-server-side-service';
 import { fetchPosts } from '@/services/post-service';
-import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
-import { GetServerSidePropsContext } from 'next';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
-const POSTS_KEY = 'postsx';
+
 
 export default function PostPage() {
 
   const router = useRouter();
 
-  const { i18n } = useTranslation('common');
+  const [showLoader, setShowLoader] = useState(false);
 
-  const { t } = i18n;
+  const page = parseInt(typeof router.query?.page === "string" ? router.query.page : '1');
 
-  const keyword = typeof router.query?.keyword === "string" ? router.query.keyword : '';
+  const keyword = router.query?.keyword as string;
 
-  const { data: pageable } = useQuery([POSTS_KEY], () => fetchPosts({ keyword }));
+  const tag = router.query?.tag as string;
 
+  const queryKey = ['posts', page || 1, keyword || '', tag || ''];
+
+  const { data: pageable, isLoading } = useQuery(queryKey,
+    () => fetchPosts({ page, keyword, tag }),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false
+    });
+
+  useEffect(() => {
+
+    console.log('useEffect...');
+    if (isLoading) {
+      setShowLoader(true);
+    } else {
+      setTimeout(() => {
+        setShowLoader(false);
+      }, 200);
+    }
+
+  }, [isLoading]);
 
   return (
-    <div className='w-full h-full grow flex justify-center items-start'>
-      <div className='w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col'>
-        {
-          keyword && <div className='flex justify-between my-5 px-2 md:px-0'>
-            <div className='flex justify-center items-center gap-2 py-2 px-4 bg-gray-600 text-sm text-white'>
-              <SearchIcon className='w-[15px] h-[15px]' />
-              <span className='font-bold uppercase'>{t('keyword')}</span>
-              <span className='font-bold uppercase'>: </span>
-              <span>{keyword}</span>
-            </div>
-            <div className='flex justify-center items-center gap-2 py-2 px-4 bg-gray-600 text-sm text-white'>
-              <span className='font-bold uppercase'>{t('total')}</span>
-              <span className='font-bold uppercase'>: </span>
-              <span>{pageable?.pagination.total}</span>
-            </div>
+    <>
+      {
+        showLoader && <div className="z-[53] fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+          <div className="bg-gray-500 opacity-70 p-1 rounded-full shadow shadow-gray-900/50 border border-gray-600">
+            <div style={{ "borderTopColor": "transparent" }}
+              className="w-12 h-12 border-4 border-gray-50 border-dashed rounded-full animate-spin"></div>
           </div>
-        }
-
-        <div className="flex flex-col flex-wrap gap-2 px-2 md:px-0">
-          {
-            pageable && pageable.data.map((post, index) => <PostItem key={index} post={post} />)
-          }
-          {
-            pageable && pageable.pagination.total === 0 &&
-            <div className='border border-gray-300 p-3 text-center'>{t('dataIsEmpty')}</div>
-          }
         </div>
+      }
+      <div className='w-full h-full grow flex flex-col justify-start items-center'>
+        <PostList tag={tag} keyword={keyword} pageable={pageable} />
       </div>
-    </div>
+    </>
   )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const props = await serverSideTranslations(context.locale ?? 'id', ['common']);
-  const keyword = context.params?.keyword as string;
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: [POSTS_KEY],
-    queryFn: () => fetchPosts({ keyword }),
-  })
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-      ...props
-    },
-  };
-}
+export const getServerSideProps = getPostsServerSideProps;

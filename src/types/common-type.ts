@@ -1,10 +1,13 @@
+export type Pagination = {
+    total: number,
+    totalPage: number,
+    page: number,
+    pageSize: number
+}
+
 export type Pageable<T> = {
     data: Array<T>,
-    pagination: {
-        total: number,
-        page?: number,
-        pageSize?: number
-    },
+    pagination: Pagination,
     keyword?: string,
     tag?:string
 }

@@ -21,7 +21,7 @@ export default function PostItem({ post }: Props) {
     }
 
     const handleSelectTag = (tag: string) => {
-        router.push(`/tag/${tag}`, undefined, { locale: i18n.language });
+        router.push(`/post?tag=${tag}`, undefined, { locale: i18n.language });
     }
 
     

@@ -2,12 +2,8 @@ import axios from "@/libs/axios";
 import { markdownToHtml } from "@/libs/markdown";
 import { Pageable } from "@/types/common-type";
 import { Post } from "@/types/post-type";
+import { RequestParams } from "@/types/request-params-type";
 
-type RequestParams = {
-    tag?: string,
-    keyword?: string,
-    page?: number
-}
 
 
 export async function fetchPosts(params?: RequestParams): Promise<Pageable<Post>> {
