@@ -40,11 +40,13 @@ export default function Navbar() {
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 pb-[40px]"
-            style={{ "background": "linear-gradient(to top, transparent, #ffffff)" }}>
-            <div className='border-b border-gray-300 bg-gray-100'>
-                <div className="h-[90px] sm:h-[50px] px-2 md:px-0 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col sm:flex-row gap-1 items-center justify-center mx-auto bg-gray-100">
+            style={{ "background": "linear-gradient(to top, transparent, #ededed)" }}>
+            <div className='border-b border-[#eee] bg-white'>
+                <div className="h-[90px] sm:h-[50px] px-2 md:px-0 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col sm:flex-row gap-1 items-center justify-center mx-auto">
                     <div className='w-full flex items-center justify-between'>
-                        <Link href={'/'} className={`uppercase leading-none text-2xl text-gray-600 sm:text-3xl ${logoFont.className}`}>MARMEAM.COM</Link>
+                        <Link href={'/'} className={`uppercase leading-none text-2xl text-[#333] sm:text-3xl ${logoFont.className}`}>
+                            <span>MARMEAM</span><span className='text-[#7fa921]'>.COM</span>
+                        </Link>
                         <div className='flex gap-1 items-center justify-center'>
                             <TagMenu />
                             <LanguageSwitcher />

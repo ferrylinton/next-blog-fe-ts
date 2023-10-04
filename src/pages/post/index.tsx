@@ -1,3 +1,4 @@
+import PagingInfo from '@/components/PagingInfo';
 import PostList from '@/components/PostList';
 import { getPostsServerSideProps } from '@/services/post-server-side-service';
 import { fetchPosts } from '@/services/post-service';
@@ -51,7 +52,8 @@ export default function PostPage() {
           </div>
         </div>
       }
-      <div className='w-full h-full grow flex flex-col justify-start items-center'>
+      <div className='w-full h-full grow flex flex-col justify-start items-center pt-[70px]'>
+        <PagingInfo tag={tag} keyword={keyword} total={pageable?.pagination.total || 0} />
         <PostList tag={tag} keyword={keyword} pageable={pageable} />
       </div>
     </>
