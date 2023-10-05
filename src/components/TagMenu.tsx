@@ -2,6 +2,8 @@
 
 import { useTags } from '@/hooks/tag-hook';
 import AngelDownIcon from '@/icons/AngelDownIcon';
+import CheckIcon from '@/icons/CheckIcon';
+import TagsIcon from '@/icons/TagsIcon';
 import clsx from 'clsx';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
@@ -31,7 +33,7 @@ export default function TagMenu() {
 
     const getSelectedLabel = () => {
         if (selected) {
-            return selected.replace('/tag/', '');
+            return selected;
         } else {
             return t('allTag');
         }
@@ -40,24 +42,33 @@ export default function TagMenu() {
     return (
         <>
             <div className='relative'>
-                <button className={`h-[36px] px-3 relative flex gap-1 sm:gap-2 items-center justify-center text-sm border border-gray-400 ${open ? 'ring-2 ring-blue-200' : ''}`} onClick={() => setOpen(!open)}>
-                    <span className='uppercase'>{getSelectedLabel()}</span>
-                    <AngelDownIcon className='w-[10px] h-[10px] cursor-pointer' />
+                <button className={`h-[36px] px-3 relative flex gap-2 items-center justify-center text-sm border text-stone-500 border-stone-300 ${open ? 'ring-2 ring-lime-200' : ''}`} onClick={() => setOpen(!open)}>
+                    <TagsIcon className='w-[20px] h-[20px] md:hidden' />
+                    <span className='uppercase leading-none hidden md:inline-block'>{getSelectedLabel()}</span>
+                    <AngelDownIcon className='w-[10px] h-[10px]' />
                 </button>
                 <div className={`absolute top-[calc(100%+2px)] z-[52] right-0 w-48 bg-white ${open ? 'animate-slideDownAndFade' : 'hidden'}`}>
-                    <div className='flex flex-col items-center justify-center p-2 border border-gray-300 shadow-[0px_5px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_5px_20px_-15px_rgba(22,_23,_24,_0.2)]'>
-                        {selected && <Link key='allTag'
-                            className='w-full py-1 px-4 rounded uppercase border border-white hover:bg-gray-200 hover:text-gray-700 hover:border-gray-300'
-                            onClick={handleSelectTag}
-                            href='/post'>{t('allTag')}</Link>}
+                    <div className='flex flex-col items-center justify-center p-2 border border-stone-300 shadow-[0px_5px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_5px_20px_-15px_rgba(22,_23,_24,_0.2)]'>
+                        {
+                            selected &&
+                            <Link key='allTag'
+                                className='relative w-full py-1 ps-6 px-2 uppercase border border-white hover:bg-lime-100 hover:border-lime-300'
+                                onClick={handleSelectTag}
+                                href='/post'>
+                                <span className='inline-block leading-none'>{t('allTag')}</span>
+                            </Link>
+                        }
                         {
                             tags && tags.map((tag) => {
                                 return (
                                     <Link
                                         key={tag.name}
-                                        className='w-full py-1 px-4 rounded uppercase border border-white hover:bg-gray-200 hover:text-gray-700 hover:border-gray-300'
+                                        className='relative w-full py-1 ps-6 px-2 uppercase border border-white hover:bg-lime-100 hover:border-lime-300'
                                         onClick={handleSelectTag}
-                                        href={`/post?tag=${tag.name}`}>{tag.name}</Link>
+                                        href={`/post?tag=${tag.name}`}>
+                                        {selected === tag.name && <CheckIcon className='absolute text-lime-600 left-[5px] top-1/2 -translate-y-1/2  w-[12px] h-[12px]' />}
+                                        <span className='inline-block leading-none'>{tag.name}</span>
+                                    </Link>
                                 )
                             })
                         }

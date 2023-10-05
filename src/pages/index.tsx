@@ -21,8 +21,9 @@ export default function HomePage() {
 
   return (
     <>
-      <Banner />
+      
       <div className='w-full h-full grow flex flex-col justify-center items-center'>
+      <Banner />
         <div className={`w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col`}>
           <div className='flex justify-start items-center gap-2 mb-5'>
             <PostIcon className='w-[20px] h-[20px] font-bold'/>

@@ -21,7 +21,7 @@ body{
   }
 
   .markdown{
-    @apply prose prose-red bg-white max-w-none text-gray-700 prose-headings:text-gray-600 prose-a:no-underline hover:prose-a:text-blue-800
+    @apply prose prose-stone bg-white max-w-none prose-a:no-underline hover:prose-a:text-lime-600
   }
 
   .markdown{
