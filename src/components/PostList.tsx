@@ -27,7 +27,7 @@ export default function PostList({tag, keyword, pageable} : Props) {
                     }
                     {
                         pageable && pageable.data.length === 0 &&
-                        <div className='border border-gray-300 bg-gray-100 p-3 text-center'>{t('dataIsEmpty')}</div>
+                        <div className='border border-stone-200 bg-stone-50 px-3 py-6 text-center'>{t('dataIsEmpty')}</div>
                     }
                 </div>
             </div>

@@ -7,5 +7,6 @@
     "total": "Total",
     "pageOf" : "Page {{page, number}} of {{totalPage, number}}",
     "dataIsEmpty": "Data is empty",
-    "selectTag": "Select Tag ..."
+    "selectTag": "Select Tag",
+    "recentBlogPosts" : "Recent Blog Posts"
 }

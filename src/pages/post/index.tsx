@@ -52,7 +52,7 @@ export default function PostPage() {
           </div>
         </div>
       }
-      <div className='w-full h-full grow flex flex-col justify-start items-center pt-[70px]'>
+      <div className='w-full h-full grow flex flex-col justify-start items-center pt-[70px] px-2 pb-5'>
         <PagingInfo tag={tag} keyword={keyword} total={pageable?.pagination.total || 0} />
         <PostList tag={tag} keyword={keyword} pageable={pageable} />
       </div>

@@ -28,7 +28,6 @@ export const getPostsServerSideProps = async (context: GetServerSidePropsContext
     }
 
     const queryKey = ['posts', page || 1, keyword || '', tag || ''];
-    console.log('queryKey server : ' + queryKey);
 
     await queryClient.prefetchQuery({
         queryKey,
@@ -47,8 +46,8 @@ export function getRequestParams(context: GetServerSidePropsContext) {
     const locale = context.locale ?? 'id';
     const requestParams: RequestParams = { page: 1 };
 
-    if (context.query?.tag && context.query?.tag.length > 2) {
-        requestParams.tag = context.query?.tag as string
+    if (context.query?.tag && context.query.tag.length > 2) {
+        requestParams.tag = context.query.tag as string
     }
 
     if (context.query?.keyword && context.query?.keyword.length > 2) {

@@ -1,7 +1,6 @@
 import CodeIcon from '@/icons/CodeIcon';
 import clsx from 'clsx';
-import { Great_Vibes, Righteous, Roboto, Satisfy, Shadows_Into_Light } from 'next/font/google';
-import Image from 'next/image';
+import { Righteous, Satisfy } from 'next/font/google';
 
 const greatVibes = Satisfy({
     weight: '400',
@@ -15,8 +14,8 @@ const righteous = Righteous({
 
 export default function Banner() {
     return (
-        <div className='w-full flex justify-center items-center pt-[90px]  sm:pt-[60px] ps-2 pe-5 mb-3 md:mb-5 bg-[#f5f5f5] border-b border-[#e9e9e9]'>
-            <div className='w-full md:px-0 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl h-[130px] md:h-[150px] px-3 sm:px-5 lg:px-8 flex items-center justify-between gap-2'>
+        <div className='w-full flex justify-center items-center mt-[50px] bg-stone-100 border-b border-stone-200'>
+            <div className='w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl h-[130px] md:h-[170px] px-5 md:px-8 flex items-center justify-between gap-2'>
                 <div className='w-full flex flex-col justify-center text-center sm:text-start items-center gap-1'>
                     <div className={clsx(righteous.className, 'w-full text-4xl sm:text-4xl md:text-5xl', 'bg-gradient-to-b from-lime-400 to-lime-800 bg-clip-text text-transparent', 'drop-shadow-[0_1px_1px_rgba(0,0,0,1)]')}>Simple Code Sample</div>
                     <div className={clsx(greatVibes.className, 'w-full text-xl text-lime-800')}>Contoh2 sederhana kode pemrograman, css, html</div>

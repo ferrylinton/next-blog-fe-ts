@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 
-body{
-  color: #333;
-  background-color: #ffffff;
-}
-
 .scroll-bars-hidden {
   overflow: hidden !important;
   padding-right: 17px !important;
@@ -15,6 +10,10 @@ body{
 
 
 @layer components {
+
+  body{
+    @apply text-stone-700 bg-white
+  }
 
   svg {
     @apply w-[12px] h-[12px] fill-current

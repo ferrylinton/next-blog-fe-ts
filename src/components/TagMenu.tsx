@@ -35,7 +35,7 @@ export default function TagMenu() {
         if (selected) {
             return selected;
         } else {
-            return t('allTag');
+            return (router.pathname === '/post') ? t('allTag') : t('selectTag');
         }
     }
 
@@ -50,11 +50,11 @@ export default function TagMenu() {
                 <div className={`absolute top-[calc(100%+2px)] z-[52] right-0 w-48 bg-white ${open ? 'animate-slideDownAndFade' : 'hidden'}`}>
                     <div className='flex flex-col items-center justify-center p-2 border border-stone-300 shadow-[0px_5px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_5px_20px_-15px_rgba(22,_23,_24,_0.2)]'>
                         {
-                            selected &&
                             <Link key='allTag'
                                 className='relative w-full py-1 ps-6 px-2 uppercase border border-white hover:bg-lime-100 hover:border-lime-300'
                                 onClick={handleSelectTag}
                                 href='/post'>
+                                {!selected &&  router.pathname === '/post' && <CheckIcon className='absolute text-lime-600 left-[5px] top-1/2 -translate-y-1/2  w-[12px] h-[12px]' />}
                                 <span className='inline-block leading-none'>{t('allTag')}</span>
                             </Link>
                         }

@@ -1,43 +1,38 @@
 import Banner from '@/components/Banner';
 import PostItem from '@/components/PostItem';
+import PostIcon from '@/icons/PostIcon';
 import { fetchPosts } from '@/services/post-service';
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { GetServerSidePropsContext } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import PostIcon from '@/icons/PostIcon';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 
 const POSTS_KEY = 'POSTS_INDEX';
 
 export default function HomePage() {
 
-  const router = useRouter();
-
   const { i18n } = useTranslation('common');
+
+  const { t } = i18n;
 
   const { data: pageable } = useQuery([POSTS_KEY], () => fetchPosts());
 
   return (
-    <>
-      
-      <div className='w-full h-full grow flex flex-col justify-center items-center'>
+    <div className='w-full h-full grow flex flex-col justify-center items-center'>
       <Banner />
-        <div className={`w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col`}>
-          <div className='flex justify-start items-center gap-2 mb-5'>
-            <PostIcon className='w-[20px] h-[20px] font-bold'/>
-            <span className='text-xl'>Recent blog posts</span>
-          </div>
-          <div className="flex flex-col flex-wrap gap-2 px-2 md:px-0">
-            {
-              pageable && pageable.data.map((post, index) => <PostItem key={index} post={post} />)
-            }
-          </div>
+      <div className={`w-full px-2 pb-5 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col`}>
+        <div className='flex justify-start items-center gap-2 pb-2 my-5 border-b-4 border-lime-500'>
+          <PostIcon className='w-[20px] h-[20px] font-bold' />
+          <span className='text-xl'>{t('recentBlogPosts')}</span>
+        </div>
+        <div className="flex flex-col flex-wrap gap-1">
+          {
+            pageable && pageable.data.map((post, index) => <PostItem key={index} post={post} />)
+          }
         </div>
       </div>
-    </>
-
+    </div>
   )
 }
 
