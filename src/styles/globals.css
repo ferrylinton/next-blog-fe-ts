@@ -20,6 +20,42 @@ body{
     @apply w-[12px] h-[12px] fill-current
   }
 
+  .search-bar {
+    @apply relative sm:flex bg-white sm:p-0 h-[36px] w-[35px] sm:w-[200px] md:w-[300px] border border-stone-300 overflow-hidden
+  } 
+
+  .search-bar {
+    @apply focus-within:ring-2 focus-within:ring-lime-200
+  }
+
+  .search-bar {
+    @apply focus-within:fixed focus-within:flex focus-within:w-[calc(100%-16px)] focus-within:z-[55] focus-within:top-[8px] focus-within:inset-x-[8px] 
+  }
+
+  .search-bar {
+    @apply focus-within:sm:static focus-within:sm:w-[200px] focus-within:md:w-[300px] focus-within:sm:z-auto focus-within:sm:top-auto focus-within:sm:inset-x-auto
+  }
+
+  .search-bar button[type="submit"]{
+    @apply border-none focus:outline-none h-full w-[35px] text-stone-400 hover:text-stone-500
+  }
+
+  .search-bar button[type="submit"] svg{
+    @apply w-[20px] h-[20px] mx-auto
+  }
+
+  .search-bar input[type="text"]{
+    @apply grow h-full border-none text-sm focus:outline-none
+  }
+
+  .search-bar button[type="button"]{
+    @apply border-none h-full w-[35px] text-stone-400 hover:text-stone-500
+  }
+
+  .search-bar button[type="button"] svg{
+    @apply w-[20px] h-[20px] mx-auto
+  }
+
   .markdown{
     @apply prose prose-stone bg-white max-w-none prose-a:no-underline hover:prose-a:text-lime-600
   }
