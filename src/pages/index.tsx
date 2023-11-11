@@ -19,7 +19,7 @@ export default function HomePage() {
   const { data: pageable } = useQuery([POSTS_KEY], () => fetchPosts());
 
   return (
-    <div className='w-full h-full grow flex flex-col justify-center items-center'>
+    <div className='w-full h-full grow flex flex-col justify-start items-center'>
       <Banner />
       <div className={`w-full px-2 pb-5 md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col`}>
         <div className='flex justify-start items-center gap-2 pb-2 my-5 border-b-4 border-lime-500'>

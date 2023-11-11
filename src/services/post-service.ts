@@ -11,7 +11,7 @@ export async function fetchPosts(params?: RequestParams): Promise<Pageable<Post>
 };
 
 export async function fetchPostBySlug(slug: string): Promise<Post> {
-    return await axios.get<Post>(`/api/posts?slug=${slug}`).then(({ data }) => {
+    return await axios.get<Post>(`/api/posts/${slug}`).then(({ data }) => {
         data.content.en = markdownToHtml(data.content.en);
         data.content.id = markdownToHtml(data.content.id);
         return data;

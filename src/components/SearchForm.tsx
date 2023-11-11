@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, FocusEvent, useRef, useState } from 'react';
 
 
-export default function SearchForm(url: string) {
+export default function SearchForm() {
 
     const { i18n } = useTranslation('common');
 
@@ -44,12 +44,12 @@ export default function SearchForm(url: string) {
 
     const handleReset = () => {
         setKeyword('');
-        router.push(url, undefined, { locale: i18n.language });
+        router.push('/post', undefined, { locale: i18n.language });
     }
 
     return (
         <form
-            action={url}
+            action={'/post'}
             onSubmit={handleSubmit}
             noValidate
             autoComplete='off'
