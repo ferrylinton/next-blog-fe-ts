@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import axiosInstance from "./axios";
 
 
-export default new QueryClient({
+export const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
             queryFn: ({ queryKey }) =>

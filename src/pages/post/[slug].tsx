@@ -1,14 +1,10 @@
-import { markdownToHtml } from '@/libs/markdown';
+import PostMetaInfo from '@/components/PostMetaInfo';
 import { fetchPostBySlug } from '@/services/post-service';
 import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 import { GetServerSidePropsContext } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useRouter } from "next/router";
 import { useTranslation } from 'next-i18next';
-import { useState, useEffect } from 'react'
-import CalendarIcon from '@/icons/CalendarIcon';
-import { getPostDate } from '@/utils/date-util';
-import TagIcon from '@/icons/TagIcon';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 
 const POST_BY_SLUG_KEY: string = 'PostBySlug'
 
@@ -18,45 +14,20 @@ type Props = {
 
 export default function PostBySlug({ slug }: Props) {
 
-    const router = useRouter();
-
     const { i18n } = useTranslation('common');
-
-    const [isClient, setIsClient] = useState(false);
-
-    const handleSelectTag = (tag: string) => {
-        router.push(`/tag/${tag}`, undefined, { locale: i18n.language });
-    }
-
-    useEffect(() => {
-        setIsClient(true)
-    }, [])
-
 
     const { data: post } = useQuery([POST_BY_SLUG_KEY, slug], () => fetchPostBySlug(slug));
 
     return (
         <div className='w-full h-full grow flex justify-center items-start px-2 pt-[70px] pb-5'>
             <div className='w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col'>
-                {isClient && post &&
+                {post &&
                     <div>
-                        <div className='flex gap-3 text-sm uppercase mb-5'>
-                            <div className="flex justify-center items-center gap-1 leading-none py-1 border-b border-gray-400 ">
-                                <CalendarIcon className='w-[15px] h-[15px]' />
-                                <span>{getPostDate(post)}</span>
-                            </div>
-                            <div className='flex gap-3'>
-                                {
-                                    post.tags.map(tag => {
-                                        return (<div key={tag} onClick={() => handleSelectTag(tag)} className='flex justify-center items-center gap-1 leading-none py-1 border-b border-gray-400 cursor-pointer'>
-                                            <TagIcon className='w-[15px] h-[15px]' />
-                                            <span>{tag}</span>
-                                        </div>)
-                                    })
-                                }
-                            </div>
+                        <div className='my-4'>
+                            <PostMetaInfo post={post} />
                         </div>
-                        <div className="markdown"
+                        <div
+                            className="markdown"
                             dangerouslySetInnerHTML={{ __html: post?.content[i18n.language as keyof typeof post.content] }} />
                     </div>
                 }

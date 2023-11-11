@@ -28,11 +28,11 @@ export default function Paging({ pagination }: Props) {
             <Link
                 href={{ pathname, query: { ...query, page: 1 } }}
                 className='w-[60px] h-[40px] border border-slate-300 text-stone-700 flex items-center justify-center hover:text-lime-900 hover:bg-gradient-to-b from-lime-50 via-lime-100 to-lime-200'>
-                <div className='h-[20px] w-[2px] bg-stone-700 inline-block'>{' '}</div>
+                <div className='h-[20px] w-[4px] bg-stone-700 inline-block'></div>
                 <PreviousIcon className='w-[30px] h-[30px]' />
             </Link> :
             <div className='w-[60px] h-[40px] border border-slate-300 bg-gray-100 text-gray-400 cursor-not-allowed flex items-center justify-center'>
-                <div className='h-[20px] w-[2px] bg-gray-400 inline-block'></div>
+                <div className='h-[20px] w-[4px] bg-gray-400 inline-block'></div>
                 <PreviousIcon className='w-[30px] h-[30px]' />
             </div>
 
@@ -67,11 +67,11 @@ export default function Paging({ pagination }: Props) {
                 }}
                 className='w-[60px] h-[40px] border border-slate-300 text-stone-700 flex items-center justify-center hover:text-lime-900 hover:bg-gradient-to-b from-lime-50 via-lime-100 to-lime-200'>
                 <NextIcon className='w-[30px] h-[30px]' />
-                <div className='h-[20px] w-[2px] bg-stone-700 inline-block'>{' '}</div>
+                <div className='h-[20px] w-[4px] bg-stone-700 inline-block'></div>
             </Link> :
             <div className='w-[60px] h-[40px] border border-slate-300 bg-gray-100 text-gray-400 cursor-not-allowed flex items-center justify-center'>
                 <NextIcon className='w-[30px] h-[30px]' />
-                <div className='h-[20px] w-[2px] bg-slate-300 inline-block'>{' '}</div>
+                <div className='h-[20px] w-[4px] bg-slate-300 inline-block'></div>
             </div>
 
         return (

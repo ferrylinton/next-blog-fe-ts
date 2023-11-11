@@ -47,7 +47,7 @@ export default function TagMenu() {
                     <span className='uppercase leading-none hidden md:inline-block'>{getSelectedLabel()}</span>
                     <AngelDownIcon className='w-[10px] h-[10px]' />
                 </button>
-                <div className={`absolute top-[calc(100%+2px)] z-[52] right-0 w-48 bg-white ${open ? 'animate-slideDownAndFade' : 'hidden'}`}>
+                <div className={`absolute top-[calc(100%+2px)] z-[53] right-0 w-48 bg-white ${open ? 'animate-slideDownAndFade' : 'hidden'}`}>
                     <div className='flex flex-col items-center justify-center p-2 border border-stone-300 shadow-[0px_5px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_5px_20px_-15px_rgba(22,_23,_24,_0.2)]'>
                         {
                             <Link key='allTag'
@@ -75,7 +75,7 @@ export default function TagMenu() {
                     </div>
                 </div>
             </div>
-            <div onClick={() => setOpen(false)} className={clsx('bg-transparent fixed inset-0 z-[51]', !open && 'hidden')} />
+            <div onClick={() => setOpen(false)} className={clsx('bg-transparent fixed inset-0 z-[52]', !open && 'hidden')} />
         </>
     );
 };

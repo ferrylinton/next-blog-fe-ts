@@ -7,14 +7,17 @@ import { useRouter } from 'next/router';
 import { ChangeEvent, FocusEvent, useRef, useState } from 'react';
 
 
-export default function SearchForm() {
+export default function SearchForm(url: string) {
+
+    const { i18n } = useTranslation('common');
+
+    const { t } = i18n;
 
     const inputRef = useRef<HTMLInputElement>(null);
 
     const router = useRouter();
 
     const [keyword, setKeyword] = useState<string>(typeof router.query?.keyword === "string" ? router.query.keyword : '');
-
 
     const handleFocus = (event: FocusEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -41,16 +44,12 @@ export default function SearchForm() {
 
     const handleReset = () => {
         setKeyword('');
-        router.push('/post', undefined, { locale: i18n.language });
+        router.push(url, undefined, { locale: i18n.language });
     }
-
-    const { i18n } = useTranslation('common');
-
-    const { t } = i18n;
 
     return (
         <form
-            action='/post'
+            action={url}
             onSubmit={handleSubmit}
             noValidate
             autoComplete='off'
