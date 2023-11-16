@@ -2,6 +2,7 @@ import MarkdownIt from 'markdown-it';
 import highlightjs from 'markdown-it-highlightjs';
 
 const md = MarkdownIt().use(highlightjs);
+const prefixPath = `${process.env.NEXT_PUBLIC_API_HOST}/api/images/view/`;
 
 export const markdownToHtml = (str: string | undefined) : string => {
     if(str){
@@ -15,10 +16,10 @@ export const replaceImageUrl = (content: string) => {
     const regex = /\]\((.+)(?=(\.(svg|gif|png|jpe?g)))/g;
 
     return content.replace(regex, (_fullResult, imagePath) => {
-        if(imagePath.startsWith(process.env.NEXT_PUBLIC_API_HOST)){
-            return imagePath;
+        if(imagePath.startsWith(prefixPath)){
+            return `](${imagePath}`;
         }else{
-            const newImagePath = `${process.env.NEXT_PUBLIC_API_HOST}${imagePath}`;
+            const newImagePath = `${prefixPath}${imagePath}`;
             return `](${newImagePath}`;
         }
     })

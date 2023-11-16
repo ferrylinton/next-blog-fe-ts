@@ -24,6 +24,7 @@ export default function Layout({ children, tags }: Props) {
                             height={32}
                             unoptimized
                             alt='author.jpg'
+                            priority
                             className="w-32 h-32 border-2 border-gray-200 object-cover object-center rounded-full shadow-lg antialiased"
                             src="/images/author.jpg" />
                         <div className='text-left text-gray-300 my-2'>
