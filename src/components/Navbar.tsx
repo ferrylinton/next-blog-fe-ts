@@ -3,6 +3,7 @@ import Link from 'next/link';
 import LanguageSwitcher from './LanguageSwitcher';
 import SearchForm from './SearchForm';
 import TagMenu from './TagMenu';
+import { Tag } from '@/types/tag-type';
 
 
 const logoFont = Righteous({
@@ -10,7 +11,11 @@ const logoFont = Righteous({
     subsets: ['latin']
 });
 
-export default function Navbar() {
+type Props = {
+    tags: Tag[] | null
+}
+
+export default function Navbar({tags} : Props) {
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 pb-[40px] bg-gradient-to-b from-stone-300  to-transparent">
@@ -22,7 +27,7 @@ export default function Navbar() {
                             <span className='text-lime-500 drop-shadow-[0_1px_1px_rgba(0,0,0,1)]'>.COM</span>
                         </Link>
                         <div className='flex gap-1 sm:ml-auto bg-white'>
-                            <TagMenu />
+                            <TagMenu tags={tags} />
                             <SearchForm />
                             <LanguageSwitcher />
                         </div>

@@ -1,22 +1,22 @@
 import Banner from '@/components/Banner';
 import PostItem from '@/components/PostItem';
 import PostIcon from '@/icons/PostIcon';
-import { fetchPosts } from '@/services/post-service';
-import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
+import { getLatestPosts } from '@/services/post-service';
+import { withCommonData } from '@/services/wrapper-service';
+import { Post } from '@/types/post-type';
+import { MessageError } from '@/types/response-type';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 
-const POSTS_KEY = 'POSTS_INDEX';
+type Props = {
+  posts?: Post[],
+  messageError?: MessageError
+}
 
-export default function HomePage() {
+export default function HomePage({ posts, messageError }: Props) {
 
-  const { i18n } = useTranslation('common');
-
-  const { t } = i18n;
-
-  const { data: pageable } = useQuery([POSTS_KEY], () => fetchPosts());
+  const { t } = useTranslation('common');
 
   return (
     <div className='w-full h-full grow flex flex-col justify-start items-center'>
@@ -27,28 +27,21 @@ export default function HomePage() {
           <span className='text-xl'>{t('recentBlogPosts')}</span>
         </div>
         <div className="flex flex-col flex-wrap gap-1">
-          {
-            pageable && pageable.data.map((post, index) => <PostItem key={index} post={post} />)
-          }
+          {posts && posts.map((post, index) => <PostItem key={index} post={post} />)}
+          {messageError && <div className="w-full bg-red-700 px-4 py-3 mb-8 text-sm flex flex-col text-white capitalize">{messageError.message}</div>}
         </div>
       </div>
     </div>
   )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const props = await serverSideTranslations(context.locale ?? 'id', ['common'])
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: [POSTS_KEY],
-    queryFn: () => fetchPosts(),
-  })
+export const getServerSideProps = withCommonData(async (context: GetServerSidePropsContext) => {
+  const { data: posts } = await getLatestPosts();
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
-      ...props
+      posts
     },
-  };
-}
+  }
+
+})

@@ -79,4 +79,18 @@
     @apply prose-code:p-1
   }
 
+  .btn {
+    @apply transition duration-300 ease-out;
+    @apply h-[45px] border px-4 cursor-pointer flex justify-center items-center gap-2;
+  }
+
+  .btn-link{
+    @apply border-stone-300 text-stone-500 shadow-[0_1px_4px_0_rgba(0,0,0,0.1)];
+    @apply hover:border-stone-400 hover:text-stone-600 hover:bg-stone-100
+  }
+
+  .btn-disabled{
+    @apply cursor-not-allowed bg-stone-200 border-stone-300 text-stone-400 shadow-[0_1px_4px_0_rgba(0,0,0,0.1)];
+  }
+
 }

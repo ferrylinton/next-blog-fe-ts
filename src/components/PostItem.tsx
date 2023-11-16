@@ -20,7 +20,7 @@ export default function PostItem({ post }: Props) {
     }
 
     return (
-        <article className="w-full mb-2 bg-white flex flex-col justify-start p-2 border border-stone-200 transition-colors hover:text-lime-900 hover:bg-gradient-to-b from-lime-50 via-lime-100 to-lime-200">
+        <article className="w-full mb-2 bg-white flex flex-col justify-start p-2 border border-stone-200 transition-colors hover:text-lime-900 hover:bg-stone-100">
             <div className='flex flex-col p-2'>
                 <div className='group flex flex-col'>
                     <Link href={`/post/${post.slug}`} className='mb-3 text-lg md:text-xl font-semibold cursor-pointer'>

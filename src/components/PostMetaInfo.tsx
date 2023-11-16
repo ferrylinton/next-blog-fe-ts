@@ -21,11 +21,11 @@ export default function PostMetaInfo({ post }: Props) {
 
     return (
         <div className='flex gap-3 text-sm uppercase'>
-            <div className="flex justify-center items-center gap-1 leading-none py-1 border-b border-gray-400 ">
-                <CalendarIcon className='w-[15px] h-[15px]' />
-                <span>{getPostDate(post)}</span>
-            </div>
-            <div className='flex gap-3'>
+            <div className="flex flex-wrap justify-start items-center gap-2 leading-none py-1">
+                <div className='flex justify-center items-center gap-1 leading-none py-1 border-b border-stone-400 cursor-pointer'>
+                    <CalendarIcon className='w-[15px] h-[15px]' />
+                    <span>{getPostDate(post)}</span>
+                </div>
                 {
                     post.tags.map(tag => {
                         return (<div key={tag} onClick={() => handleSelectTag(tag)} className='flex justify-center items-center gap-1 leading-none py-1 border-b border-stone-400 cursor-pointer'>

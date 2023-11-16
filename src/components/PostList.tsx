@@ -6,17 +6,19 @@ import { useTranslation } from 'next-i18next';
 
 
 type Props = {
-    tag?: string
-    keyword?: string,
     pageable?: Pageable<Post>
 }
 
-export default function PostList({tag, keyword, pageable} : Props) {
+export default function PostList({pageable} : Props) {
 
     const { i18n } = useTranslation('common');
 
     const { t } = i18n;
 
+    if(!pageable){
+        return null;
+    }
+    
     return (
         <>
             <div className='w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col justify-center'>

@@ -22,7 +22,7 @@ export default function PagingInfo({ tag, keyword, total }: Props) {
                     <TagIcon className='w-[15px] h-[15px]' />
                     <span className='capitalize'>{t('tag')}</span>
                     <span>: </span>
-                    <span>{tag}</span>
+                    <span className='uppercase'>{tag}</span>
                 </div>}
                 {keyword && <div className='flex justify-center items-center gap-2 py-2 text-xl'>
                     <SearchIcon className='w-[15px] h-[15px]' />

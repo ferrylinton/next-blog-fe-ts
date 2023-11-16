@@ -1,8 +1,14 @@
-import axios from "@/libs/axios";
+import { logger } from "@/configs/winston";
+import blogApiClient from "@/libs/blog-api-client";
 import { Tag } from "@/types/tag-type";
 
-export const TAGS_KEY = ['tags'];
 
-export async function fetchTags(): Promise<Array<Tag>> {
-    return await axios.get<Array<Tag>>(`/api/tags`).then(({ data }) => data)
+export async function getTags(): Promise<Tag[]> {
+    try {
+        const { data } = await blogApiClient.get<Array<Tag>>(`/api/tags`);
+        return data;
+    } catch (error) {
+        logger.error(error);
+        return []
+    }
 };

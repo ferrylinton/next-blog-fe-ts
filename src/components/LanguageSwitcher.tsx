@@ -1,17 +1,39 @@
+import { COOKIE_NEXT_LOCALE } from '@/configs/constant';
 import * as Switch from '@radix-ui/react-switch';
+import { getCookie, setCookie } from 'cookies-next';
+import { OptionsType } from 'cookies-next/lib/types';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
+const option: OptionsType = {
+    sameSite: 'strict',
+    path: "/"
+};
 
 export default function LanguageSwitcher() {
 
     const router = useRouter();
 
+    const { pathname, asPath, query } = router;
+
     const { i18n } = useTranslation('common');
+
+    useEffect(() => {
+        const locale = getCookie(COOKIE_NEXT_LOCALE);
+
+        if (!locale) {
+            setCookie(COOKIE_NEXT_LOCALE, i18n.language, option);
+        } else if (locale !== i18n.language) {
+            router.push({ pathname, query }, asPath, { locale });
+        }
+    })
 
     const handleOnCheckedChange = (checked: boolean) => {
         const { pathname, asPath, query } = router;
-        router.push({ pathname, query }, asPath, { locale: checked ? 'en' : 'id' }) ;
+        const locale = checked ? 'en' : 'id';
+        setCookie(COOKIE_NEXT_LOCALE, locale, option);
+        router.push({ pathname, query }, asPath, { locale });
     }
 
     return (

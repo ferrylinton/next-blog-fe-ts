@@ -8,5 +8,7 @@
     "pageOf" : "Halaman {{page, number}} dari {{totalPage, number}}",
     "dataIsEmpty": "Data tidak ditemukan",
     "selectTag": "Pilih Tag",
-    "recentBlogPosts" : "Postingan Blog Terbaru"
+    "recentBlogPosts" : "Postingan Blog Terbaru",
+    "dataNotFound": "Data tidak ditemukan",
+    "pageNotFound": "Halaman tidak ditemukan"
 }

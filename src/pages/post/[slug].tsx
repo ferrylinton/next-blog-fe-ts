@@ -1,22 +1,25 @@
+import NotFound from '@/components/NotFound';
 import PostMetaInfo from '@/components/PostMetaInfo';
-import { fetchPostBySlug } from '@/services/post-service';
-import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
+import { markdownToHtml } from '@/libs/markdown';
+import { getPostBySlug } from '@/services/post-service';
+import { withCommonData } from '@/services/wrapper-service';
+import { Post } from '@/types/post-type';
+import { MessageError } from '@/types/response-type';
 import { GetServerSidePropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useRouter } from 'next/router';
 
-
-const POST_BY_SLUG_KEY: string = 'PostBySlug'
 
 type Props = {
-    slug: string
+    post?: Post,
+    messageError?: MessageError
 }
 
-export default function PostBySlug({ slug }: Props) {
+export default function PostBySlug({ post, messageError }: Props) {
+
+    const router = useRouter();
 
     const { i18n } = useTranslation('common');
-
-    const { data: post } = useQuery([POST_BY_SLUG_KEY, slug], () => fetchPostBySlug(slug));
 
     return (
         <div className='w-full h-full grow flex justify-center items-start px-2 pt-[70px] pb-5'>
@@ -31,26 +34,31 @@ export default function PostBySlug({ slug }: Props) {
                             dangerouslySetInnerHTML={{ __html: post?.content[i18n.language as keyof typeof post.content] }} />
                     </div>
                 }
+                { !post && !messageError && <NotFound slug={router.query.slug} /> }
+                {messageError && <div className="w-full bg-red-700 px-4 py-3 mb-8 text-sm flex flex-col text-white capitalize">{messageError.message}</div>}
             </div>
         </div>
     )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-    const props = await serverSideTranslations(context.locale ?? 'id', ['common']);
+export const getServerSideProps = withCommonData(async (context: GetServerSidePropsContext) => {
     const slug = context.params?.slug as string;
-    const queryClient = new QueryClient();
+    const { data: post } = await getPostBySlug(slug);
 
-    await queryClient.prefetchQuery({
-        queryKey: [POST_BY_SLUG_KEY, slug],
-        queryFn: () => fetchPostBySlug(slug),
-    })
+    if (post) {
+        post.content.en = markdownToHtml(post.content.en);
+        post.content.id = markdownToHtml(post.content.id);
 
-    return {
-        props: {
-            slug,
-            dehydratedState: dehydrate(queryClient),
-            ...props
-        },
-    };
-}
+        return {
+            props: {
+                post
+            },
+        };
+    } else {
+        return {
+            props: {}
+        };
+    }
+  
+  })
+
