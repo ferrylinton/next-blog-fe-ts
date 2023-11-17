@@ -10,5 +10,8 @@
     "selectTag": "Pilih Tag",
     "recentBlogPosts" : "Postingan Blog Terbaru",
     "dataNotFound": "Data tidak ditemukan",
-    "pageNotFound": "Halaman tidak ditemukan"
+    "pageNotFound": "Halaman tidak ditemukan",
+    "serviceUnavailable": "Layanan tidak tersedia",
+    "tooManyRequests": "Terlalu banyak proses",
+    "internalServerError": "Terjadi kesalahan di server"
 }

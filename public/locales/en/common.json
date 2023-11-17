@@ -10,5 +10,8 @@
     "selectTag": "Select Tag",
     "recentBlogPosts" : "Recent Blog Posts",
     "dataNotFound": "Data is not found",
-    "pageNotFound": "Page is not found"
+    "pageNotFound": "Page is not found",
+    "serviceUnavailable": "Service Unavailable",
+    "tooManyRequests": "Too many requests",
+    "internalServerError": "Internal Server Error"
 }

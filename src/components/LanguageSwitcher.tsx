@@ -8,7 +8,8 @@ import { useEffect } from 'react';
 
 const option: OptionsType = {
     sameSite: 'strict',
-    path: "/"
+    path: "/",
+    maxAge: 60 * 60 * 24 * 30
 };
 
 export default function LanguageSwitcher() {
