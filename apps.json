@@ -1,7 +1,7 @@
 {
     "apps": [
         {
-            "name": "blogadmin",
+            "name": "blog",
             "cwd": "/home/marmeamc/sourcecode/next-blog-fe-ts",
             "script": "./node_modules/next/dist/bin/next",
             "instances": 1,
