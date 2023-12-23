@@ -1,5 +1,6 @@
 import CalendarIcon from '@/icons/CalendarIcon';
 import TagIcon from '@/icons/TagIcon';
+import ViewedIcon from '@/icons/ViewedIcon';
 import { Post } from '@/types/post-type';
 import { getPostDate } from '@/utils/date-util';
 import { useTranslation } from 'next-i18next';
@@ -20,20 +21,24 @@ export default function PostMetaInfo({ post }: Props) {
     }
 
     return (
-        <div className='flex gap-3 text-sm uppercase'>
-            <div className="flex flex-wrap justify-start items-center gap-2 leading-none py-1">
-                <div className='flex justify-center items-center gap-1 leading-none py-1 border-b border-stone-400 cursor-pointer'>
+        <div className='flex font-light text-[0.8rem] text-stone-500 uppercase'>
+            <div className="flex flex-wrap justify-start items-center gap-4 leading-none py-1">
+                <div className='flex items-end gap-1'>
                     <CalendarIcon className='w-[15px] h-[15px]' />
                     <span>{getPostDate(post)}</span>
                 </div>
                 {
                     post.tags.map(tag => {
-                        return (<div key={tag} onClick={() => handleSelectTag(tag)} className='flex justify-center items-center gap-1 leading-none py-1 border-b border-stone-400 cursor-pointer'>
+                        return (<div key={tag} onClick={() => handleSelectTag(tag)} className='flex items-end gap-1 cursor-pointer'>
                             <TagIcon className='w-[15px] h-[15px]' />
                             <span>{tag}</span>
                         </div>)
                     })
                 }
+                {post.viewed && <div className='flex items-end gap-1'>
+                    <ViewedIcon className='w-[15px] h-[15px]' />
+                    <span>{post.viewed}</span>
+                </div>}
             </div>
         </div>
     )

@@ -17,5 +17,6 @@ export type Post = {
     content: {
         id: string,
         en: string
-    }
+    },
+    viewed: number
 }

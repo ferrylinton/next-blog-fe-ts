@@ -35,7 +35,7 @@ export default function HomePage({ posts, messageError }: Props) {
   )
 }
 
-export const getServerSideProps = withCommonData(async (context: GetServerSidePropsContext) => {
+export const getServerSideProps = withCommonData(async () => {
   const { data: posts } = await getLatestPosts();
 
   return {

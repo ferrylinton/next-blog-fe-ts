@@ -23,6 +23,7 @@
     "eslint-config-next": "13.4.19",
     "i18next": "^23.5.1",
     "markdown-it": "^13.0.2",
+    "markdown-it-container": "^4.0.0",
     "markdown-it-highlightjs": "^4.0.1",
     "next": "13.4.19",
     "next-i18next": "^14.0.3",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
-    "@types/markdown-it": "^13.0.2"
+    "@types/markdown-it": "^13.0.2",
+    "@types/markdown-it-container": "^2.0.9"
   }
 }

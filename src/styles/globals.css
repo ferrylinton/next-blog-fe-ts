@@ -19,6 +19,14 @@
     @apply w-[12px] h-[12px] fill-current
   }
 
+  .post-item-description{
+    @apply cursor-pointer;
+  }
+
+  .post-item-description a{
+    @apply font-semibold text-lime-700 underline underline-offset-2;
+  }
+
   .search-bar {
     @apply relative sm:flex bg-white sm:p-0 h-[36px] w-[35px] sm:w-[200px] md:w-[300px] border border-stone-300 overflow-hidden
   } 
@@ -56,27 +64,78 @@
   }
 
   .markdown{
-    @apply prose prose-stone bg-white max-w-none prose-a:no-underline hover:prose-a:text-lime-600
+    @apply prose prose-stone bg-white max-w-none prose-a:underline-offset-2 prose-a:text-lime-700 hover:prose-a:text-lime-600
+  }
+
+  .markdown :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker,
+  .markdown :where(ol > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker{
+    @apply text-stone-600;
   }
 
   .markdown{
-    @apply prose-h1:text-2xl prose-h2:text-xl prose-h2:mt-2 prose-h2:mb-1 prose-h3:text-lg
+    @apply prose-h1:break-all prose-h2:break-all prose-h3:break-all;
+    @apply prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg;
   }
 
   .markdown{
-    @apply prose-p:my-1
+    @apply prose-p:my-4
   }
 
   .markdown{
-    @apply prose-img:my-1 prose-img:rounded-lg prose-img:border-2 prose-img:border-slate-200
+    @apply prose-img:my-1 prose-img:rounded-none prose-img:border prose-img:border-stone-200 prose-img:shadow-lg ;
   }
 
   .markdown{
-    @apply prose-pre:border prose-pre:border-[#ddd] prose-pre:my-1 prose-pre:p-0 prose-pre:rounded-none prose-pre:bg-[#f9f9f9] prose-pre:text-[#333]
+    @apply prose-pre:border prose-pre:border-stone-300 prose-pre:my-1 prose-pre:p-0 prose-pre:rounded-none prose-pre:bg-stone-100/80 prose-pre:text-stone-700;
   }
 
   .markdown{
     @apply prose-code:p-1
+  }
+
+  .markdown .github p{
+    @apply w-full flex gap-2;
+    @apply transition duration-300 ease-out;
+    @apply border border-stone-300 text-stone-500 shadow-[0_1px_4px_0_rgba(0,0,0,0.1)];
+    @apply hover:border-stone-400 hover:text-stone-600 hover:bg-stone-100;
+  }
+
+  .markdown .github p a{
+    @apply text-sm md:text-base p-3 ps-[55px] no-underline relative break-all;
+    @apply before:inline-block before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:m-auto before:bg-center before:bg-no-repeat before:w-[60px] before:h-[24px];
+    @apply before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjYgMC0xMiA1LjM3My0xMiAxMiAwIDUuMzAyIDMuNDM4IDkuOCA4LjIwNyAxMS4zODcuNTk5LjExMS43OTMtLjI2MS43OTMtLjU3N3YtMi4yMzRjLTMuMzM4LjcyNi00LjAzMy0xLjQxNi00LjAzMy0xLjQxNi0uNTQ2LTEuMzg3LTEuMzMzLTEuNzU2LTEuMzMzLTEuNzU2LTEuMDg5LS43NDUuMDgzLS43MjkuMDgzLS43MjkgMS4yMDUuMDg0IDEuODM5IDEuMjM3IDEuODM5IDEuMjM3IDEuMDcgMS44MzQgMi44MDcgMS4zMDQgMy40OTIuOTk3LjEwNy0uNzc1LjQxOC0xLjMwNS43NjItMS42MDQtMi42NjUtLjMwNS01LjQ2Ny0xLjMzNC01LjQ2Ny01LjkzMSAwLTEuMzExLjQ2OS0yLjM4MSAxLjIzNi0zLjIyMS0uMTI0LS4zMDMtLjUzNS0xLjUyNC4xMTctMy4xNzYgMCAwIDEuMDA4LS4zMjIgMy4zMDEgMS4yMy45NTctLjI2NiAxLjk4My0uMzk5IDMuMDAzLS40MDQgMS4wMi4wMDUgMi4wNDcuMTM4IDMuMDA2LjQwNCAyLjI5MS0xLjU1MiAzLjI5Ny0xLjIzIDMuMjk3LTEuMjMuNjUzIDEuNjUzLjI0MiAyLjg3NC4xMTggMy4xNzYuNzcuODQgMS4yMzUgMS45MTEgMS4yMzUgMy4yMjEgMCA0LjYwOS0yLjgwNyA1LjYyNC01LjQ3OSA1LjkyMS40My4zNzIuODIzIDEuMTAyLjgyMyAyLjIyMnYzLjI5M2MwIC4zMTkuMTkyLjY5NC44MDEuNTc2IDQuNzY1LTEuNTg5IDguMTk5LTYuMDg2IDguMTk5LTExLjM4NiAwLTYuNjI3LTUuMzczLTEyLTEyLTEyeiIvPjwvc3ZnPg==')];
+  }
+
+  .markdown .post-navigation p{
+    @apply flex items-start pt-6;
+  }
+
+  .markdown .post-navigation p:has(> a[title=next]),
+  .markdown .post-navigation p:has(> a[title=berikutnya]) {
+    @apply justify-end;
+  }
+  .markdown .post-navigation p:has(> :last-child:nth-child(2)) {
+    @apply  flex-col sm:flex-row justify-between gap-3 sm:gap-1;
+  }
+
+  .markdown .post-navigation p a{
+    @apply transition duration-300 ease-out relative pt-[16px];
+    @apply flex items-center;
+    @apply no-underline text-sm;
+  }
+
+  .markdown .post-navigation p a[title=next],
+  .markdown .post-navigation p a[title=berikutnya] {
+    @apply order-last text-right;
+    @apply after:content-['\25BA'] after:block after:ps-2;
+    @apply before:content-[attr(title)] before:absolute before:top-0 before:right-[24px] before:uppercase before:text-[9px] before:text-stone-800 before:font-light;
+  }
+
+  .markdown .post-navigation p a[title=previous],
+  .markdown .post-navigation p a[title=sebelumnya] {
+    @apply order-first text-left;
+    @apply before:content-['\25c4'] before:block before:pe-2; 
+    @apply after:content-[attr(title)] after:absolute after:top-0 after:left-[24px] after:uppercase after:text-[9px] after:text-stone-800 after:font-light;
   }
 
   .btn {
@@ -86,7 +145,7 @@
 
   .btn-link{
     @apply border-stone-300 text-stone-500 shadow-[0_1px_4px_0_rgba(0,0,0,0.1)];
-    @apply hover:border-stone-400 hover:text-stone-600 hover:bg-stone-100
+    @apply hover:border-stone-400 hover:text-stone-600 hover:bg-stone-100;
   }
 
   .btn-disabled{

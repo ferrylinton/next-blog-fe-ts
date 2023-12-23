@@ -51,7 +51,9 @@ export default function PostBySlug({ post, messageError }: Props) {
 
 export const getServerSideProps = withCommonData(async (context: GetServerSidePropsContext) => {
     const slug = context.params?.slug as string;
-    const { data: post } = await getPostBySlug(slug);
+    const clientIp = (context.req.headers["x-real-ip"] || context.req.headers['x-forwarded-for'] || context.req.socket.remoteAddress || '') as string;
+    const userAgent = context.req.headers['user-agent'] || '';
+    const { data: post } = await getPostBySlug(slug, clientIp, userAgent);
 
     if (post) {
         post.content.en = markdownToHtml(post.content.en);

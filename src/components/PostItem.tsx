@@ -20,8 +20,8 @@ export default function PostItem({ post }: Props) {
     }
 
     return (
-        <article className="w-full mb-2 bg-white flex flex-col justify-start p-2 border border-stone-200 transition-colors hover:text-lime-900 hover:bg-stone-100">
-            <div className='flex flex-col p-2'>
+        <article className="w-full mb-4 bg-white flex flex-col justify-start transition-colors hover:text-lime-900">
+            <div className='flex flex-col'>
                 <div className='group flex flex-col'>
                     <Link href={`/post/${post.slug}`} className='mb-3 text-lg md:text-xl font-semibold cursor-pointer'>
                         {post.title[i18n.language as keyof typeof post.description]}{' '}
@@ -29,10 +29,10 @@ export default function PostItem({ post }: Props) {
                             -&gt;
                         </span>
                     </Link>
-                    <p className='cursor-pointer' onClick={() => handleSelectPost(`/post/${post.slug}`)}>{post.description[i18n.language as keyof typeof post.description]}</p>
-                    <div className='mt-3'>
-                        <PostMetaInfo post={post} />
-                    </div>
+                    <p className='post-item-description' 
+                        onClick={() => handleSelectPost(`/post/${post.slug}`)}
+                        dangerouslySetInnerHTML={{ __html: post.description[i18n.language as keyof typeof post.description]}} />
+                    <PostMetaInfo post={post} />
                 </div>
             </div>
         </article>
