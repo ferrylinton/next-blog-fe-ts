@@ -1,6 +1,7 @@
 import PagingInfo from '@/components/PagingInfo';
 import PostList from '@/components/PostList';
 import { isValidPage } from '@/libs/paging-util';
+import { getDescription } from '@/services/metadata-service';
 import { getPosts } from '@/services/post-service';
 import { withCommonData } from '@/services/wrapper-service';
 import { Pageable } from '@/types/common-type';
@@ -8,14 +9,16 @@ import { Post } from '@/types/post-type';
 import { RequestParams } from '@/types/request-params-type';
 import { MessageError } from '@/types/response-type';
 import { GetServerSidePropsContext } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 type Props = {
+  description: string,
   pageable?: Pageable<Post>,
   messageError?: MessageError
 }
 
-export default function PostPage({ pageable, messageError }: Props) {
+export default function PostPage({ description, pageable, messageError }: Props) {
 
   const router = useRouter();
 
@@ -25,6 +28,10 @@ export default function PostPage({ pageable, messageError }: Props) {
 
   return (
     <>
+      <Head>
+        <title>marmeam.com</title>
+        <meta name="description" content={description} />
+      </Head>
       <div className='w-full h-full grow flex flex-col justify-start items-center pt-[70px] px-2 pb-5'>
         <PagingInfo tag={tag} keyword={keyword} total={pageable?.pagination.total || 0} />
         <PostList pageable={pageable} />
@@ -36,6 +43,7 @@ export default function PostPage({ pageable, messageError }: Props) {
 
 export const getServerSideProps = withCommonData(async (context: GetServerSidePropsContext) => {
   const { page, keyword, tag, destination } = getRequestParams(context);
+  const description = getDescription(context.locale);
 
   if (destination) {
       return {
@@ -50,7 +58,8 @@ export const getServerSideProps = withCommonData(async (context: GetServerSidePr
 
   return {
       props: {
-          pageable
+          pageable,
+          description
       }
   }
 })
