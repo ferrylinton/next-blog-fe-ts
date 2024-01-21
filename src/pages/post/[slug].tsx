@@ -56,7 +56,7 @@ export const getServerSideProps = withCommonData(async (context: GetServerSidePr
     const { data: post } = await getPostBySlug(slug, clientIp, userAgent);
 
     if (post) {
-        post.content.en = markdownToHtml(post.content.en);
+        post.content.en = markdownToHtml(post.content.en, context.locale);
         post.content.id = markdownToHtml(post.content.id);
 
         return {

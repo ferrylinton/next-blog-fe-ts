@@ -9,8 +9,12 @@ const md = MarkdownIt()
 
 const prefixPath = `${process.env.NEXT_PUBLIC_API_HOST}/api/images/view/`;
 
-export const markdownToHtml = (str: string | undefined): string => {
+export const markdownToHtml = (str: string | undefined, locale?: string | undefined) => {
     if (str) {
+        if(locale && locale === 'en'){
+            str = str.replaceAll('/post/', '/en/post/')
+        }
+
         return md.render(replaceImageUrl(str));
     } else {
         return 'undefined';
