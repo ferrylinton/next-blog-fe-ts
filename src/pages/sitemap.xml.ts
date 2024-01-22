@@ -1,5 +1,5 @@
 import { logger } from "@/configs/winston";
-import { getSitemaps } from "@/services/sitemap-service";
+import { getSitemaps } from "@/services/app-service";
 import { Url } from "@/types/sitemap-type";
 import { GetServerSidePropsContext } from "next";
 
@@ -18,11 +18,11 @@ function generateSiteMap(urls: Url[]) {
   `
 }
 
-export async function getServerSideProps({ res }: GetServerSidePropsContext) {
+export async function getServerSideProps({ req, res }: GetServerSidePropsContext) {
   let sitemaps: Url[] = [];
 
   try {
-    const { data } = await getSitemaps();
+    const { data } = await getSitemaps(req.headers['user-agent'] || '');
     sitemaps = data;
   } catch (error) {
     console.error(error);

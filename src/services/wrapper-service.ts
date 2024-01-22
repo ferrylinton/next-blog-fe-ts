@@ -24,8 +24,8 @@ export function withCommonData(gssp: GetServerSideProps) {
                 }
             }
         } catch (error: any) {
-            console.error(error);
-            logger.error(error);
+            console.error(error.message);
+            logger.error(error.message);
 
             if (axios.isAxiosError(error)) {
                 const response = error?.response

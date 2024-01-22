@@ -54,7 +54,7 @@ export const getServerSideProps = withCommonData(async (context: GetServerSidePr
       }
   }
 
-  const { data: pageable } = await getPosts({ page, keyword, tag });
+  const { data: pageable } = await getPosts(context.req.headers['user-agent'] || '', { page, keyword, tag });
 
   return {
       props: {

@@ -49,7 +49,7 @@ export default function HomePage({ description, posts, messageError }: Props) {
 }
 
 export const getServerSideProps = withCommonData(async (context: GetServerSidePropsContext) => {
-  const { data: posts } = await getLatestPosts();
+  const { data: posts } = await getLatestPosts(context.req.headers['user-agent'] || '');
   const description = getDescription(context.locale);
 
   return {
