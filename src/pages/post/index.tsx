@@ -54,7 +54,8 @@ export const getServerSideProps = withCommonData(async (context: GetServerSidePr
       }
   }
 
-  const { data: pageable } = await getPosts(context.req.headers['user-agent'] || '', { page, keyword, tag });
+  const clientIp = (context.req.headers["x-real-ip"] || context.req.headers['x-forwarded-for'] || context.req.socket.remoteAddress || '') as string;
+  const { data: pageable } = await getPosts(clientIp, context.req.headers['user-agent'] || '', { page, keyword, tag });
 
   return {
       props: {

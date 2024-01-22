@@ -49,7 +49,8 @@ export default function HomePage({ description, posts, messageError }: Props) {
 }
 
 export const getServerSideProps = withCommonData(async (context: GetServerSidePropsContext) => {
-  const { data: posts } = await getLatestPosts(context.req.headers['user-agent'] || '');
+  const clientIp = (context.req.headers["x-real-ip"] || context.req.headers['x-forwarded-for'] || context.req.socket.remoteAddress || '') as string;
+  const { data: posts } = await getLatestPosts(clientIp, context.req.headers['user-agent'] || '');
   const description = getDescription(context.locale);
 
   return {

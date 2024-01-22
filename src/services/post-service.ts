@@ -6,18 +6,20 @@ import { RawAxiosRequestHeaders } from "axios";
 
 
 
-export async function getPosts(userAgent: string, params?: RequestParams) {
+export async function getPosts(clientIp: string, userAgent: string, params?: RequestParams) {
     const headers: RawAxiosRequestHeaders = {
         'Accept': 'application/json',
+        'x-client-ip': clientIp,
         'User-Agent': userAgent
     };
 
     return await blogApiClient.get<Pageable<Post>>(`/api/posts`, { params, headers });
 };
 
-export async function getLatestPosts(userAgent: string) {
+export async function getLatestPosts(clientIp: string, userAgent: string) {
     const headers: RawAxiosRequestHeaders = {
         'Accept': 'application/json',
+        'x-client-ip': clientIp,
         'User-Agent': userAgent
     };
 

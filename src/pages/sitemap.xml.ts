@@ -22,7 +22,8 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
   let sitemaps: Url[] = [];
 
   try {
-    const { data } = await getSitemaps(req.headers['user-agent'] || '');
+    const clientIp = (req.headers["x-real-ip"] || req.headers['x-forwarded-for'] || req.socket.remoteAddress || '') as string;
+    const { data } = await getSitemaps(clientIp, req.headers['user-agent'] || '');
     sitemaps = data;
   } catch (error) {
     console.error(error);
